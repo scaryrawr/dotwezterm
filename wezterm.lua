@@ -15,18 +15,18 @@ config.window_decorations = "RESIZE"
 
 -- Detect system appearance and set color scheme accordingly
 local function get_appearance()
-if wezterm.gui then
-return wezterm.gui.get_appearance()
-end
-return "Dark"
+	if wezterm.gui then
+		return wezterm.gui.get_appearance()
+	end
+	return "Dark"
 end
 
 local function scheme_for_appearance(appearance)
-if appearance:find("Dark") then
-return "Catppuccin Mocha"
-else
-return "Catppuccin Latte"
-end
+	if appearance:find("Dark") then
+		return "Catppuccin Mocha"
+	else
+		return "Catppuccin Latte"
+	end
 end
 
 config.color_scheme = scheme_for_appearance(get_appearance())
@@ -38,7 +38,21 @@ local function user_and_host()
 end
 
 tabline.setup({
-	options = { theme = config.color_scheme },
+	options = {
+		theme = config.color_scheme,
+		section_separators = {
+			left = wezterm.nerdfonts.ple_right_half_circle_thick,
+			right = wezterm.nerdfonts.ple_left_half_circle_thick,
+		},
+		component_separators = {
+			left = wezterm.nerdfonts.ple_right_half_circle_thin,
+			right = wezterm.nerdfonts.ple_left_half_circle_thin,
+		},
+		tab_separators = {
+			left = wezterm.nerdfonts.ple_right_half_circle_thick,
+			right = wezterm.nerdfonts.ple_left_half_circle_thick,
+		},
+	},
 	sections = {
 		tabline_z = { user_and_host },
 	},
